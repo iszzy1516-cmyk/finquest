@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import {
   Zap, TrendingUp, Shield, Trophy, ArrowRight,
   Wallet, Target, BarChart3, ChevronRight,
+  Sun, Moon,
 } from "lucide-react";
 
 export default function Landing() {
-  const { resolvedTheme } = useTheme();
+  const { resolvedTheme, toggleTheme } = useTheme();
   const isLight = resolvedTheme === "light";
 
   const features = [
@@ -83,7 +84,19 @@ export default function Landing() {
               FinQuest
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
+              style={{
+                backgroundColor: "var(--bg-card-inner)",
+                border: "1px solid var(--border-color)",
+                color: "var(--text-secondary)",
+              }}
+              title={isLight ? "Switch to dark mode" : "Switch to light mode"}
+            >
+              {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            </button>
             <Link
               to="/login"
               className="text-sm font-medium hover:underline"
