@@ -1,0 +1,50 @@
+# ── Node / Frontend ──
+node_modules/
+dist/
+*.local
+.env
+.env.*
+!.env.example
+.vite/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+coverage/
+.nyc_output/
+
+# ── Python / Backend ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+*.sqlite3
+*.db
+
+# ── IDEs ──
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ── OS ──
+Thumbs.db
