@@ -267,7 +267,7 @@ export function TransactionsPage() {
 
 function TransactionForm({ categories, onSubmit, onCancel, isLoading, isLight }: {
   categories: Array<{ id: number; name: string; type: string }>;
-  onSubmit: (data: { type: "income" | "expense"; amount: string; categoryId: number; description: string; transactionDate: string }) => void;
+  onSubmit: (data: { type: "income" | "expense"; amount: string; category_id: number; description: string; transaction_date: string }) => void;
   onCancel: () => void;
   isLoading: boolean;
   isLight: boolean;
@@ -332,7 +332,7 @@ function TransactionForm({ categories, onSubmit, onCancel, isLoading, isLight }:
       </div>
 
       <div className="flex gap-3 pt-2">
-        <Button onClick={() => { if (!amount || !categoryId) return; onSubmit({ type, amount, categoryId: parseInt(categoryId), description, transactionDate: date }); }} disabled={!amount || !categoryId || isLoading} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">
+        <Button onClick={() => { if (!amount || !categoryId) return; onSubmit({ type, amount, category_id: parseInt(categoryId), description, transaction_date: date }); }} disabled={!amount || !categoryId || isLoading} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">
           {isLoading ? "Saving..." : "Add Transaction"}
         </Button>
         <Button variant="outline" onClick={onCancel} className="border-[#475569] text-[#94a3b8] hover:bg-[#334155]">Cancel</Button>

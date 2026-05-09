@@ -134,7 +134,7 @@ export function GoalsPage() {
 }
 
 function GoalForm({ onSubmit, onCancel, isLoading, isLight }: {
-  onSubmit: (data: { name: string; targetAmount: string; deadline?: string }) => void;
+  onSubmit: (data: { name: string; target_amount: string | number; deadline?: string }) => void;
   onCancel: () => void;
   isLoading: boolean;
   isLight: boolean;
@@ -150,7 +150,7 @@ function GoalForm({ onSubmit, onCancel, isLoading, isLight }: {
       <div><Label style={{ color: "var(--text-secondary)" }}>Target Amount</Label><Input type="number" step="0.01" placeholder="0.00" value={amount} onChange={e => setAmount(e.target.value)} className="mt-1" style={inputStyle} /></div>
       <div><Label style={{ color: "var(--text-secondary)" }}>Deadline (optional)</Label><Input type="date" value={deadline} onChange={e => setDeadline(e.target.value)} className="mt-1" style={inputStyle} /></div>
       <div className="flex gap-3 pt-2">
-        <Button onClick={() => { if (!name || !amount) return; onSubmit({ name, targetAmount: amount, deadline: deadline || undefined }); }} disabled={!name || !amount || isLoading} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">{isLoading ? "Creating..." : "Create Goal"}</Button>
+        <Button onClick={() => { if (!name || !amount) return; onSubmit({ name, target_amount: amount, deadline: deadline || undefined }); }} disabled={!name || !amount || isLoading} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">{isLoading ? "Creating..." : "Create Goal"}</Button>
         <Button variant="outline" onClick={onCancel} className="border-[#475569] text-[#94a3b8] hover:bg-[#334155]">Cancel</Button>
       </div>
     </div>

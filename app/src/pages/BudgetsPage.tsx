@@ -128,7 +128,7 @@ function BudgetCard({ budget, onDelete, isLight }: { budget: any; onDelete: () =
 
 function BudgetForm({ categories, onSubmit, onCancel, isLoading, isLight }: {
   categories: Array<{ id: number; name: string; type: string }>;
-  onSubmit: (data: { name: string; categoryId?: number; amount: string; periodStart: string; periodEnd: string; alertThreshold: number }) => void;
+  onSubmit: (data: { name: string; category_id?: number; amount: string; period_start: string; period_end: string; alert_threshold: number }) => void;
   onCancel: () => void;
   isLoading: boolean;
   isLight: boolean;
@@ -162,7 +162,7 @@ function BudgetForm({ categories, onSubmit, onCancel, isLoading, isLight }: {
       </div>
       <div><Label style={{ color: "var(--text-secondary)" }}>Alert Threshold (%)</Label><Input type="number" min={1} max={100} value={threshold} onChange={e => setThreshold(e.target.value)} className="mt-1" style={inputStyle} /></div>
       <div className="flex gap-3 pt-2">
-        <Button onClick={() => { if (!name || !amount || !endDate) return; onSubmit({ name, amount, categoryId: categoryId && categoryId !== "none" ? parseInt(categoryId) : undefined, periodStart: startDate, periodEnd: endDate, alertThreshold: parseInt(threshold) || 80 }); }} disabled={!name || !amount || !endDate || isLoading} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">{isLoading ? "Creating..." : "Create Budget"}</Button>
+        <Button onClick={() => { if (!name || !amount || !endDate) return; onSubmit({ name, amount, category_id: categoryId && categoryId !== "none" ? parseInt(categoryId) : undefined, period_start: startDate, period_end: endDate, alert_threshold: parseInt(threshold) || 80 }); }} disabled={!name || !amount || !endDate || isLoading} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">{isLoading ? "Creating..." : "Create Budget"}</Button>
         <Button variant="outline" onClick={onCancel} className="border-[#475569] text-[#94a3b8] hover:bg-[#334155]">Cancel</Button>
       </div>
     </div>
