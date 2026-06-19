@@ -10,8 +10,13 @@ sys.path.insert(0, "/home/israel/Desktop/funke final year projuct/app/backend/ve
 import markdown
 from weasyprint import HTML, CSS
 
-MARKDOWN_FILE = "/home/israel/Desktop/funke final year projuct/FINQUEST_DOCUMENTATION.md"
-OUTPUT_PDF = "/home/israel/Desktop/funke final year projuct/FinQuest_Documentation.pdf"
+# Accept command-line arguments or use defaults
+if len(sys.argv) >= 3:
+    MARKDOWN_FILE = sys.argv[1]
+    OUTPUT_PDF = sys.argv[2]
+else:
+    MARKDOWN_FILE = "/home/israel/Desktop/funke final year projuct/FINQUEST_DOCUMENTATION.md"
+    OUTPUT_PDF = "/home/israel/Desktop/funke final year projuct/FinQuest_Documentation.pdf"
 
 CSS_STYLES = """
 @page {
