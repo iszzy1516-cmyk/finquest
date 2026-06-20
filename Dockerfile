@@ -39,6 +39,7 @@ COPY --from=frontend-builder /frontend/dist/public/ ./dist/public/
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV ENVIRONMENT=production
+ENV STATIC_FILES_DIR=/app/dist/public
 
 EXPOSE 8000
 

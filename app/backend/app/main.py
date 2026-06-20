@@ -133,7 +133,7 @@ def create_app() -> FastAPI:
         }
 
     # Static files & SPA fallback (production)
-    static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../dist/public"))
+    static_dir = settings.STATIC_FILES_DIR or os.path.abspath(os.path.join(os.path.dirname(__file__), "../../dist/public"))
     if os.path.isdir(static_dir):
         app.mount("/assets", StaticFiles(directory=os.path.join(static_dir, "assets")), name="assets")
 
