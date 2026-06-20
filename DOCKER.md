@@ -9,7 +9,7 @@ cd "/home/israel/Desktop/funke final year projuct"
 docker-compose up --build finquest
 ```
 
-Open: **http://localhost:8000**
+Open: **http://localhost:8887**
 
 ### Development (frontend + backend as separate services with hot reload)
 
