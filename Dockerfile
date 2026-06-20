@@ -15,7 +15,7 @@ COPY app/ ./
 RUN npm run build
 
 # ── Stage 2: Build Backend ──
-FROM python:3.13-slim AS backend
+FROM python:3.12-slim AS backend
 
 WORKDIR /app
 
@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
+# Install Python dependencies (includes numpy, scipy, scikit-learn for AI features)
 COPY app/backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -42,5 +42,4 @@ ENV ENVIRONMENT=production
 
 EXPOSE 8000
 
-# Run migrations (optional) and start the server
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

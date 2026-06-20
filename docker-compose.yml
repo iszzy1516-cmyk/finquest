@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  # Production: single backend container serving both API and frontend
+  # ── Production: single container serving frontend + backend ──
   finquest:
     build:
       context: .
@@ -20,12 +20,12 @@ services:
       - ./data:/app/data
     restart: unless-stopped
 
-  # Development: hot-reload backend
-  backend-dev:
+  # ── Development: backend with hot reload ──
+  backend:
     build:
       context: ./app/backend
       dockerfile: Dockerfile
-    container_name: finquest-backend-dev
+    container_name: finquest-backend
     ports:
       - "8001:8000"
     environment:
@@ -43,10 +43,10 @@ services:
     profiles:
       - dev
 
-  # Development: hot-reload frontend
-  frontend-dev:
+  # ── Development: frontend with hot reload ──
+  frontend:
     image: node:20-alpine
-    container_name: finquest-frontend-dev
+    container_name: finquest-frontend
     working_dir: /app
     ports:
       - "3000:3000"

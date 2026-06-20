@@ -1,8 +1,8 @@
 # FinQuest Backend Development Dockerfile
-# For development with hot reload. The frontend is served separately by Vite.
+# Includes numpy, scipy, scikit-learn for AI/ML features.
 # For production (backend + frontend in one image), use the Dockerfile at the project root.
 
-FROM python:3.13-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy backend requirements
-COPY requirements.txt .
+# Install Python dependencies (includes numpy, scipy, scikit-learn for AI features)
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend source code
