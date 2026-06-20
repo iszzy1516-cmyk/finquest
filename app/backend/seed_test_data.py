@@ -9,7 +9,7 @@ from decimal import Decimal
 # Ensure app is importable
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from app.database import SessionLocal, engine
+from app.database import SessionLocal, engine, Base
 from app.models import (
     User, Transaction, Category, Budget, Goal,
     Achievement, UserAchievement, XPRecord, RefreshToken,
@@ -17,12 +17,30 @@ from app.models import (
 )
 from app.auth.security import get_password_hash
 from app.services.gamification_service import process_gamification_event
+from app.constants import DEFAULT_CATEGORIES, ACHIEVEMENT_DEFINITIONS
 
 
 def seed():
+    # Ensure all database tables exist
+    Base.metadata.create_all(bind=engine)
+
     db = SessionLocal()
     try:
-        # Clean existing test users (optional — remove if you want to keep old data)
+        # Seed default categories
+        for cat in DEFAULT_CATEGORIES:
+            exists = db.query(Category).filter(Category.name == cat["name"], Category.is_default == True).first()
+            if not exists:
+                db.add(Category(**cat, is_default=True))
+
+        # Seed achievements
+        for ach in ACHIEVEMENT_DEFINITIONS:
+            exists = db.query(Achievement).filter(Achievement.name == ach["name"]).first()
+            if not exists:
+                db.add(Achievement(**ach))
+
+        db.commit()
+
+        # Create test users
         test_usernames = ["alice", "bob", "charlie", "demo"]
         for uname in test_usernames:
             existing = db.query(User).filter(User.username == uname).first()

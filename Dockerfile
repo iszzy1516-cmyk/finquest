@@ -29,8 +29,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY app/backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend source code
+# Copy backend source code and seed script
 COPY app/backend/app/ ./app/
+COPY app/backend/seed_test_data.py ./seed_test_data.py
+COPY app/backend/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
 
 # Copy built frontend static files into backend's static directory
 COPY --from=frontend-builder /frontend/dist/public/ ./dist/public/
@@ -43,4 +46,4 @@ ENV STATIC_FILES_DIR=/app/dist/public
 
 EXPOSE 8000
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
